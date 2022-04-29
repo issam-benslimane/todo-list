@@ -24,60 +24,40 @@
             <li><button class="btn">week</button></li>
             <li>
               <button class="btn">projects</button>
-              <ul class="projects__list">
-                <li>
-                  <button class="btn">gym</button>
-                </li>
-                <li>
-                  <button class="btn">study</button>
-                </li>
-                <li>
-                  <button class="btn">work</button>
-                </li>
-              </ul>
+              <div class="projects">
+                <ul class="projects__list">
+                  <li>
+                    <button class="btn">gym</button>
+                  </li>
+                  <li>
+                    <button class="btn">study</button>
+                  </li>
+                  <li>
+                    <button class="btn">work</button>
+                  </li>
+                </ul>
+              </div>
             </li>
           </ul>
           <button class="add">+</button>
         </div>
-        <div class="todos">
-          <ul class="todos__list">
-            <li class="todo">
-              <input type="checkbox" class="todo__checkbox" />
-              <p class="todo__text">take the trash out</p>
-              <button class="btn todo__btn">details</button>
-              <span class="todo__time"><time>Apr 13th</time></span>
-              <button class="todo__icon">
-                <i class="fa-solid fa-pen-to-square"></i>
-              </button>
-              <button class="todo__icon">
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
-            </li>
-          </ul>
-        </div>
+        <div class="todos"></div>
       </div>
 
-      <div class="grid-container create-todo">
+      <form action="/" class="create-todo" hidden>
         <div class="header create-todo__header">
           <h2>Create a new...</h2>
-          <button class="close-btn">
-            <i class="fa-solid fa-xmark"></i>
+          <button type="button" class="close-btn">
+            <i class="fa-solid fa-xmark fa-x"></i>
           </button>
         </div>
-        <div class="sidebar">
-          <ul class="sidebar__list">
-            <li>
-              <button class="btn btn--active">To Do</button>
-            </li>
-            <li><button class="btn">Project</button></li>
-          </ul>
-        </div>
-        <form action="/" class="create-todo__form">
+        <div class="create-todo__fields">
           <textarea
             name="title"
             rows="1"
             placeholder="Title"
             class="create-todo__title"
+            required
           ></textarea>
           <textarea
             name="description"
@@ -85,28 +65,40 @@
             placeholder="Details"
             class="create-todo__desc"
           ></textarea>
+          <div class="create-todo__select">
+            <label for="select">Project:</label>
+            <select name="project" id="select">
+              <option>Select a project:</option>
+            </select>
+          </div>
           <div class="create-todo__date">
             <label for="date">Due Date:</label>
-            <input type="date" name="date" id="date" />
+            <input type="date" name="date" id="date" required />
           </div>
           <div class="create-todo__priority">
             <p>Priority:</p>
             <div>
-              <input type="radio" name="priority" id="low" />
+              <input
+                type="radio"
+                name="priority"
+                id="low"
+                value="low"
+                checked
+              />
               <label for="low" data-priority="low">low</label>
             </div>
             <div>
-              <input type="radio" name="priority" id="medium" />
+              <input type="radio" name="priority" id="medium" value="medium" />
               <label for="medium" data-priority="medium">medium</label>
             </div>
             <div>
-              <input type="radio" name="priority" id="high" />
+              <input type="radio" name="priority" id="high" value="high" />
               <label for="high" data-priority="high">high</label>
             </div>
           </div>
           <button class="btn todo__btn" type="submit">add todo</button>
-        </form>
-      </div>
+        </div>
+      </form>
     </main>
   </body>
 </html>

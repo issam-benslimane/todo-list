@@ -89,15 +89,19 @@ select {
 .sidebar {
   background-color: hsla(225, 73%, 57%, 0.25);
   border-right: 2px solid hsla(225, 73%, 57%, 0.5);
-  padding: 1.5rem;
+  padding: 1.5em 3em;
 }
 
 .sidebar__list .btn {
   width: 100%;
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.sidebar__list > li > .btn {
+  font-size: 1.25rem;
 }
 
 .total {
@@ -115,7 +119,7 @@ select {
 }
 
 .projects__list {
-  font-size: 0.85rem;
+  font-size: 1rem;
   padding: 0.5em 0 0 1em;
 }
 
@@ -185,7 +189,7 @@ select {
   position: absolute;
   inset: 0 auto 0 0;
   width: 0.2em;
-  background-color: red;
+  background-color: var(--priority-clr);
 }
 
 .todo__icon {
@@ -238,14 +242,20 @@ select {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(0);
+  display: grid;
+  grid-template-rows: auto 1fr;
   border-radius: 0.25em;
   overflow: hidden;
-  width: min(50rem, 80%);
+  width: min(40rem, 80%);
   min-height: 60vh;
   z-index: 100;
   box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.2);
-  display: none;
+  transition: 0.25s ease;
+}
+
+.create-todo--show {
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .create-todo > .header {
@@ -283,21 +293,21 @@ select {
   pointer-events: all;
 }
 
-.create-todo__form {
-  padding: 1em;
-  background-color: #fff;
+.create-todo__fields {
   display: flex;
   flex-direction: column;
-  gap: 0.5em;
+  gap: 1em;
+  padding: 1.5em;
+  background-color: #fff;
 }
 
-.create-todo__form > textarea {
+.create-todo__fields > textarea {
   width: 100%;
   resize: none;
   border: 0;
 }
 
-.create-todo__form > textarea:focus {
+.create-todo__fields > textarea:focus {
   outline: 0;
 }
 
@@ -310,18 +320,16 @@ select {
 .create-todo__desc,
 .create-todo__desc::placeholder {
   font-size: 0.875rem;
+  margin-bottom: auto;
 }
 
 .create-todo__date,
-.create-todo__priority {
+.create-todo__priority,
+.create-todo__select {
   display: flex;
   align-items: center;
   gap: 1em;
   font-size: 0.875rem;
-}
-
-.create-todo__date {
-  margin-top: auto;
 }
 
 .create-todo__date > input {
@@ -332,6 +340,13 @@ select {
   text-transform: uppercase;
   font-size: 0.75rem;
   color: hsla(225, 73%, 57%, 0.95);
+}
+
+.create-todo__select > select {
+  padding: 0.25em;
+  border-radius: 0.25em;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 .create-todo__priority label {
