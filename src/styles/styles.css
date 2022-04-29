@@ -1,0 +1,373 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  font-family: "Montserrat";
+  line-height: 1.5;
+  display: grid;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: auto 1fr;
+}
+
+.app-container {
+  height: 100%;
+}
+
+.header {
+  grid-column: 1 / -1;
+  font-size: 2rem;
+  font-weight: bold;
+  color: aliceblue;
+  background-color: royalblue;
+  text-transform: capitalize;
+  padding: 0.5rem 1.5rem;
+}
+
+.sidebar {
+  background-color: hsla(225, 73%, 57%, 0.25);
+  border-right: 2px solid hsla(225, 73%, 57%, 0.5);
+  padding: 1.5rem;
+}
+
+.sidebar__list .btn {
+  width: 100%;
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.65rem;
+  font-weight: 600;
+  background-color: royalblue;
+  color: aliceblue;
+  border-radius: 50%;
+  width: 1.1rem;
+  aspect-ratio: 1;
+  line-height: 1;
+}
+
+.projects__list {
+  font-size: 0.85rem;
+  padding: 0.5em 0 0 1em;
+}
+
+.projects__list > li {
+  margin-bottom: 0.5em;
+}
+
+.btn {
+  display: inline-block;
+  border: 0;
+  background-color: transparent;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.btn--active,
+.btn:hover {
+  color: rgba(65, 105, 225, 0.616);
+  font-weight: 600;
+}
+
+.add {
+  background-color: royalblue;
+  color: aliceblue;
+  border: 0;
+  font-size: 2rem;
+  font-weight: 600;
+  width: 2.75rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  inset: auto auto 0.5em 0.5em;
+  transition: 0.25s;
+}
+
+.add:hover {
+  transform: scale(1.05);
+}
+
+.todos {
+  padding: 3.5em;
+}
+
+.todo {
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+  padding: 0.75em 1em;
+  border-radius: 0.25em;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0.75em;
+  box-shadow: 0 0.2em 0.25em hsla(225, 73%, 57%, 0.25);
+  background-color: hsla(225, 73%, 57%, 0.1);
+  transition: 0.25s;
+}
+
+.todo:hover {
+  transform: scale(1.01);
+}
+
+.todo::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0.2em;
+  background-color: red;
+}
+
+.todo__icon {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.todo__icon * {
+  fill: hsla(225, 73%, 57%, 0.75);
+  transition: 0.25s;
+}
+
+.todo__icon:hover * {
+  fill: hsla(225, 73%, 57%, 1);
+}
+
+.todo__btn {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-left: auto;
+  color: hsla(225, 73%, 57%, 0.75);
+  border: 1px solid hsla(225, 73%, 57%, 0.75);
+  border-radius: 0.25em;
+  padding: 0.25em 0.75em;
+  transition: background-color 0.25s;
+}
+
+.todo__btn:hover {
+  background-color: hsla(225, 73%, 57%, 0.75);
+  color: aliceblue;
+}
+
+.todo__text {
+  font-size: 1rem;
+}
+
+.todo__time {
+  font-size: 0.875rem;
+  color: hsla(225, 73%, 57%, 0.85);
+}
+
+.todo__checkbox:checked + p {
+  text-decoration: line-through;
+  color: grey;
+}
+
+.create-todo {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 0.25em;
+  overflow: hidden;
+  width: min(50rem, 80%);
+  min-height: 60vh;
+  z-index: 100;
+  box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.2);
+  display: none;
+}
+
+.create-todo > .header {
+  font-size: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-btn {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.close-btn:hover {
+  transform: scale(1.25);
+}
+
+.close-btn * {
+  fill: aliceblue;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.backdrop--active {
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.3);
+  pointer-events: all;
+}
+
+.create-todo__form {
+  padding: 1em;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.create-todo__form > textarea {
+  width: 100%;
+  resize: none;
+  border: 0;
+}
+
+.create-todo__form > textarea:focus {
+  outline: 0;
+}
+
+.create-todo__title,
+.create-todo__title::placeholder {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.create-todo__desc,
+.create-todo__desc::placeholder {
+  font-size: 0.875rem;
+}
+
+.create-todo__date,
+.create-todo__priority {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  font-size: 0.875rem;
+}
+
+.create-todo__date {
+  margin-top: auto;
+}
+
+.create-todo__date > input {
+  padding: 0.2em;
+  border: 1px solid hsla(225, 73%, 57%, 0.5);
+  border-radius: 0.25em;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: hsla(225, 73%, 57%, 0.95);
+}
+
+.create-todo__priority label {
+  display: inline-block;
+  color: var(--color);
+  border: 1px solid var(--color);
+  border-radius: 0.25em;
+  padding: 0.2em 0.75em;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.create-todo__priority input {
+  position: absolute;
+  visibility: hidden;
+  left: 9999px;
+}
+
+label[data-priority="low"] {
+  --color: green;
+}
+
+label[data-priority="medium"] {
+  --color: orange;
+}
+
+label[data-priority="high"] {
+  --color: red;
+}
+
+label[data-priority]:hover {
+  background-color: var(--color);
+  color: aliceblue;
+}
+
+.create-todo__priority input:checked + label {
+  background-color: var(--color);
+  color: aliceblue;
+}
