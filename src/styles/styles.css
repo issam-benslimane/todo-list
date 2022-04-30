@@ -238,13 +238,12 @@ select {
   color: grey;
 }
 
-.create-todo {
+.popup {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
   display: grid;
-  grid-template-rows: auto 1fr;
   border-radius: 0.25em;
   overflow: hidden;
   width: min(40rem, 80%);
@@ -254,11 +253,19 @@ select {
   transition: 0.25s ease;
 }
 
-.create-todo--show {
+.popup--show {
   transform: translate(-50%, -50%) scale(1);
 }
 
-.create-todo > .header {
+.form--create {
+  grid-template-rows: min-content 1fr;
+}
+
+.form--edit {
+  grid-template-rows: 1fr;
+}
+
+.form > .header {
   font-size: 0.75rem;
   display: flex;
   justify-content: space-between;
@@ -293,7 +300,7 @@ select {
   pointer-events: all;
 }
 
-.create-todo__fields {
+.form__fields {
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -301,38 +308,38 @@ select {
   background-color: #fff;
 }
 
-.create-todo__fields > textarea {
+.form__fields > textarea {
   width: 100%;
   resize: none;
   border: 0;
 }
 
-.create-todo__fields > textarea:focus {
+.form__fields > textarea:focus {
   outline: 0;
 }
 
-.create-todo__title,
-.create-todo__title::placeholder {
+.form__title,
+.form__title::placeholder {
   font-size: 1rem;
   font-weight: 600;
 }
 
-.create-todo__desc,
-.create-todo__desc::placeholder {
+.form__desc,
+.form__desc::placeholder {
   font-size: 0.875rem;
   margin-bottom: auto;
 }
 
-.create-todo__date,
-.create-todo__priority,
-.create-todo__select {
+.form__date,
+.form__priority,
+.form__select {
   display: flex;
   align-items: center;
   gap: 1em;
   font-size: 0.875rem;
 }
 
-.create-todo__date > input {
+.form__date > input {
   padding: 0.2em;
   border: 1px solid hsla(225, 73%, 57%, 0.5);
   border-radius: 0.25em;
@@ -342,14 +349,14 @@ select {
   color: hsla(225, 73%, 57%, 0.95);
 }
 
-.create-todo__select > select {
+.form__select > select {
   padding: 0.25em;
   border-radius: 0.25em;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
-.create-todo__priority label {
+.form__priority label {
   display: inline-block;
   color: var(--color);
   border: 1px solid var(--color);
@@ -359,7 +366,7 @@ select {
   transition: 0.25s;
 }
 
-.create-todo__priority input {
+.form__priority input {
   position: absolute;
   visibility: hidden;
   left: 9999px;
@@ -382,7 +389,7 @@ label[data-priority]:hover {
   color: aliceblue;
 }
 
-.create-todo__priority input:checked + label {
+.form__priority input:checked + label {
   background-color: var(--color);
   color: aliceblue;
 }

@@ -1,5 +1,6 @@
 import { createElement, randomId } from "../helpers/utility";
 import format from "date-fns/format";
+import Todos from "./todos";
 
 const Todo = function (details) {
   const todo = { ...details, id: randomId() };
@@ -33,6 +34,10 @@ const todoView = function (todo) {
   const deleteBtn = createElement("button", { class: "todo__icon" });
   const deleteIcon = createElement("i", { class: "fa-solid fa-trash-can" });
 
+  detailsBtn.addEventListener("click", showDetails.bind(null, todo));
+  editBtn.addEventListener("click", updateTodo.bind(null, id));
+  deleteBtn.addEventListener("click", Todos.deleteTodo.bind(null, id));
+
   editBtn.append(editIcon);
   deleteBtn.append(deleteIcon);
   li.append(input, text, detailsBtn, time, editBtn, deleteBtn);
@@ -41,6 +46,10 @@ const todoView = function (todo) {
 
   return li;
 };
+
+function showDetails({ title, priority, desc, date, project = null }) {}
+
+function updateTodo(id) {}
 
 function getPriorityClr(key) {
   return {

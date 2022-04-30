@@ -5,7 +5,7 @@ import Todo from "./todo";
 const Todos = (function () {
   const todos = [];
 
-  const getTodo = (id) => todos.find((todo) => todo.id === id);
+  const getTodo = (id) => todos.find(({ todo }) => todo.id === id);
 
   const addTodo = (todo) => {
     todos.push(todo);
@@ -13,7 +13,7 @@ const Todos = (function () {
   };
 
   const deleteTodo = (id) => {
-    const idx = todos.findIndex((todo) => todo.id === id);
+    const idx = todos.findIndex(({ todo }) => todo.id === id);
     todos.splice(idx, 1);
     todosView.render(todos);
   };
@@ -53,7 +53,6 @@ const todosView = (function () {
 
 const todosController = (function () {
   pubSub.subscribe("addTodo", (details) => {
-    console.log("here");
     const todo = Todo(details);
     Todos.addTodo(todo);
   });

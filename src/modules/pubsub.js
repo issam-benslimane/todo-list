@@ -24,7 +24,6 @@ const eventAggregator = (function () {
     publish(eventName, eventArgs) {
       if (!events[eventName]) events[eventName] = Event();
       events[eventName].fire(eventArgs);
-      console.log(events);
     },
 
     subscribe(eventName, handler) {
