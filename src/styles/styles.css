@@ -224,11 +224,11 @@ select {
   color: aliceblue;
 }
 
-.todo__text {
+.todo__title {
   font-size: 1rem;
 }
 
-.todo__time {
+.todo__date {
   font-size: 0.875rem;
   color: hsla(225, 73%, 57%, 0.85);
 }
@@ -263,6 +263,16 @@ select {
 
 .form--edit {
   grid-template-rows: 1fr;
+}
+
+.form--edit > .close-btn {
+  justify-self: flex-end;
+  padding: 1em;
+  position: absolute;
+}
+
+.form--edit > .close-btn * {
+  fill: hsla(225, 73%, 57%, 0.75);
 }
 
 .form > .header {

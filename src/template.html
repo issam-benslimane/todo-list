@@ -44,7 +44,7 @@
         <div class="todos"></div>
       </div>
 
-      <form action="/" class="form form--create popup">
+      <form action="/" class="form popup">
         <div class="header form__header">
           <h2>Create a new...</h2>
           <button type="button" class="close-btn">
@@ -60,7 +60,7 @@
             required
           ></textarea>
           <textarea
-            name="description"
+            name="desc"
             rows="3"
             placeholder="Details"
             class="form__desc"
@@ -97,55 +97,6 @@
             </div>
           </div>
           <button class="btn todo__btn" type="submit">add todo</button>
-        </div>
-      </form>
-      <form action="/" class="form form--edit popup">
-        <div class="form__fields">
-          <textarea
-            name="title"
-            rows="1"
-            placeholder="Title"
-            class="form__title"
-            required
-          ></textarea>
-          <textarea
-            name="description"
-            rows="3"
-            placeholder="Details"
-            class="form__desc"
-          ></textarea>
-          <div class="form__select">
-            <label for="select">Project:</label>
-            <select name="project" id="select">
-              <option hidden selected>Select a project:</option>
-            </select>
-          </div>
-          <div class="form__date">
-            <label for="date">Due Date:</label>
-            <input type="date" name="date" id="date" required />
-          </div>
-          <div class="form__priority">
-            <p>Priority:</p>
-            <div>
-              <input
-                type="radio"
-                name="priority"
-                id="low"
-                value="low"
-                checked
-              />
-              <label for="low" data-priority="low">low</label>
-            </div>
-            <div>
-              <input type="radio" name="priority" id="medium" value="medium" />
-              <label for="medium" data-priority="medium">medium</label>
-            </div>
-            <div>
-              <input type="radio" name="priority" id="high" value="high" />
-              <label for="high" data-priority="high">high</label>
-            </div>
-          </div>
-          <button class="btn todo__btn" type="submit">confirm edit</button>
         </div>
       </form>
     </main>
