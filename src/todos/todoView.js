@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import {
   appendDOMChild,
   createElement,
@@ -7,14 +8,7 @@ import {
   qs,
   removeChildren,
 } from "../helpers/dom";
-import {
-  curry,
-  map,
-  pipe,
-  partial,
-  prop,
-  reverseArgs,
-} from "../helpers/fp-helpers";
+import { curry, map, pipe, prop, reverseArgs } from "../helpers/fp-helpers";
 
 const todosContainer = qs(".todos");
 const addTodoBtn = qs(".add");
@@ -22,15 +16,13 @@ const getClass = curry(getAttr)("class");
 
 function render(list) {
   removeChildren(todosContainer);
-  if (list.length < 1) {
-    appendDOMChild(todosContainer, createEmptyListText());
-  } else {
-    pipe(
-      map(createTodo),
-      createList,
-      curry(appendDOMChild)(todosContainer)
-    )(list);
-  }
+  list.length < 1
+    ? appendDOMChild(todosContainer, createEmptyListText())
+    : pipe(
+        map(createTodo),
+        createList,
+        curry(appendDOMChild)(todosContainer)
+      )(list);
 }
 
 function createList(children) {
@@ -38,15 +30,15 @@ function createList(children) {
 }
 
 function createEmptyListText() {
-  return createElement("p", { content: "No Todos, No Work" });
+  return createElement("p", { content: "No Todos here..." });
 }
 
 function createTodo(data) {
-  const { id, title, date } = data;
+  const { id, title, date, priority } = data;
   const li = () =>
     createElement("li", {
       attr: [
-        ["class", "todo"],
+        ["class", `todo todo--${priority}`],
         ["data-id", id],
       ],
       children: [checkbox, p, detailsBtn, time, editBtn, deleteBtn],
@@ -72,7 +64,10 @@ function createTodo(data) {
       content: "details",
     });
   const time = () =>
-    createElement("time", { attr: [["class", "todo__date"]], content: date });
+    createElement("time", {
+      attr: [["class", "todo__date"]],
+      content: formatDate(date),
+    });
   const editBtn = () =>
     createElement("button", {
       attr: [
@@ -97,14 +92,7 @@ function createTodo(data) {
   return li;
 }
 
-const getPriorityClr = curry(
-  reverseArgs(prop),
-  2
-)({
-  low: "green",
-  medium: "blue",
-  high: "red",
-});
+const formatDate = (date) => format(new Date(date), "MMM dd");
 
 const bind = (type, handler) => {
   if (type === "add") {

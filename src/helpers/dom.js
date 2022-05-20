@@ -1,13 +1,4 @@
-import {
-  curry,
-  each,
-  partial,
-  pipe,
-  prop,
-  reverseArgs,
-  spreadArgs,
-  trace,
-} from "./fp-helpers";
+import { curry, each, partial, pipe, prop, spreadArgs } from "./fp-helpers";
 
 export function createElement(type, { attr = [], children = [], content }) {
   const el = document.createElement(type);
@@ -26,7 +17,7 @@ export function qsa(selector, el = document) {
 }
 
 export function isTextNode(el) {
-  return el?.nodeType == 3;
+  return el.nodeType == 3;
 }
 
 export function getParent(el) {

@@ -189,7 +189,18 @@ select {
   position: absolute;
   inset: 0 auto 0 0;
   width: 0.2em;
-  background-color: var(--priority-clr);
+}
+
+.todo--low::before {
+  background-color: green;
+}
+
+.todo--medium::before {
+  background-color: orange;
+}
+
+.todo--high::before {
+  background-color: red;
 }
 
 .todo__icon {
@@ -399,7 +410,7 @@ label[data-priority]:hover {
   color: aliceblue;
 }
 
-.form__priority input:checked + label {
+.form__priority input[type="radio"]:checked + label {
   background-color: var(--color);
   color: aliceblue;
 }

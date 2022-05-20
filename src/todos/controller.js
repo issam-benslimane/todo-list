@@ -1,25 +1,25 @@
 import model from "./model";
 import todoView from "./todoView";
 import formView from "./formView";
-import { curry, pipe, trace } from "../helpers/fp-helpers";
+import { curry, partial, pipe } from "../helpers/fp-helpers";
 import { getAttr, getParent } from "../helpers/dom";
-
-const defaultData = [
-  {
-    id: 1,
-    title: "gym",
-    date: "Apr 18",
-  },
-];
+import dummyData from "./dummy-data.json";
 
 function controller(model, view) {
   const { todoView, formView } = view;
+
   function init() {
     todoView.render(model.getTodos());
     todoView.bind("delegate", handleTodo);
-    todoView.bind("add", formView.showForm);
-    formView.bind("form", addTodo);
+    todoView.bind("add", curry(formView.showForm, 2)("add"));
+    formView.bind("form", handleForm);
     formView.bind("close");
+  }
+
+  function handleForm(type, data) {
+    type === "add"
+      ? pipe(model.addTodo, todoView.render)(data)
+      : pipe(curry(model.updateTodo)(handleForm.id), todoView.render)(data);
   }
 
   function handleTodo(target) {
@@ -29,8 +29,6 @@ function controller(model, view) {
     if (action === "details") showTodoDetails();
   }
 
-  const addTodo = pipe(model.addTodo, todoView.render);
-
   const deleteTodo = pipe(
     getParent,
     curry(getAttr)("data-id"),
@@ -38,12 +36,17 @@ function controller(model, view) {
     todoView.render
   );
 
-  const editTodo = 0;
+  const editTodo = (target) => {
+    const id = pipe(getParent, curry(getAttr)("data-id"))(target);
+    handleForm.id = id;
+    pipe(model.getTodo, formView.editForm)(id);
+    formView.showForm("edit");
+  };
 
   init();
 }
 
-export default controller(model(defaultData), {
+export default controller(model(dummyData), {
   todoView: todoView(),
   formView: formView(),
 });
